@@ -1,5 +1,6 @@
 import React from 'react';
 import Profile from './qcomps/profile_mistake';
+import Gallery from './qcomps/gallery_props';
 // import Head from 'next/head'
 // import Image from 'next/image'
 // import { Inter } from 'next/font/google'
@@ -11,7 +12,7 @@ export default function Home() {
   return (
     <div className={styles.main}>
         {}
-        <Profile />
+	    <Gallery />
         {}
     </div>
   );
