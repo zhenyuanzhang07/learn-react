@@ -7,9 +7,11 @@ let initialArtists = [
 ];
 
 export default function List() {
-  const [artists, setArtists] = useState(
-    initialArtists
-  );
+  const [artists, setArtists] = useState(initialArtists);
+
+  const deleteArtist = (id) => {
+    setArtists(artists.filter(artist => artist.id !== id));
+  };
 
   return (
     <>
@@ -18,9 +20,7 @@ export default function List() {
         {artists.map(artist => (
           <li key={artist.id}>
             {artist.name}{' '}
-            <button onClick={() => {
-              artists.splice(artist.id, 1)
-            }}>
+            <button onClick={() => deleteArtist(artist.id)}>
               Delete
             </button>
           </li>
