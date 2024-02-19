@@ -8,27 +8,26 @@ const initialList = [
 ];
 
 export default function BucketList() {
-  const [myList, setMyList] = useState(initialList);
-  const [yourList, setYourList] = useState(
-    initialList
-  );
+  // Create deep copies of initialList for myList and yourList
+  const [myList, setMyList] = useState(initialList.map(artwork => ({ ...artwork })));
+  const [yourList, setYourList] = useState(initialList.map(artwork => ({ ...artwork })));
 
   function handleToggleMyList(artworkId, nextSeen) {
-    const tmpList = myList.map(e => {
-        if (e.id === artworkId) {
-            e.seen = nextSeen
-        }
-        return e
+    const tmpList = myList.map(artwork => {
+      if (artwork.id === artworkId) {
+        return { ...artwork, seen: nextSeen }; // Return a new object
+      }
+      return artwork;
     });
     setMyList(tmpList);
   }
 
   function handleToggleYourList(artworkId, nextSeen) {
-    const tmpList = yourList.map(e => {
-        if (e.id === artworkId) {
-            e.seen = nextSeen
-        }
-        return e
+    const tmpList = yourList.map(artwork => {
+      if (artwork.id === artworkId) {
+        return { ...artwork, seen: nextSeen }; // Return a new object
+      }
+      return artwork;
     });
     setYourList(tmpList);
   }
@@ -57,12 +56,7 @@ function ItemList({ artworks, onToggle }) {
             <input
               type="checkbox"
               checked={artwork.seen}
-              onChange={e => {
-                onToggle(
-                  artwork.id,
-                  e.target.checked
-                );
-              }}
+              onChange={e => onToggle(artwork.id, e.target.checked)}
             />
             {artwork.title}
           </label>
