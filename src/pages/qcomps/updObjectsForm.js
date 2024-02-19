@@ -8,20 +8,27 @@ export default function Scoreboard() {
   });
 
   function handlePlusClick() {
-    player.score++;
+    // Correctly update the score immutably
+    setPlayer(prevPlayer => ({
+      ...prevPlayer,
+      score: prevPlayer.score + 1,
+    }));
   }
 
   function handleFirstNameChange(e) {
-    setPlayer({
-      ...player,
+    // Correctly maintain the rest of the player object
+    setPlayer(prevPlayer => ({
+      ...prevPlayer,
       firstName: e.target.value,
-    });
+    }));
   }
 
   function handleLastNameChange(e) {
-    setPlayer({
-      lastName: e.target.value
-    });
+    // Correctly maintain the rest of the player object
+    setPlayer(prevPlayer => ({
+      ...prevPlayer,
+      lastName: e.target.value,
+    }));
   }
 
   return (
@@ -33,6 +40,7 @@ export default function Scoreboard() {
           +1
         </button>
       </label>
+      <br />
       <label>
         First name:
         <input
@@ -40,6 +48,7 @@ export default function Scoreboard() {
           onChange={handleFirstNameChange}
         />
       </label>
+      <br />
       <label>
         Last name:
         <input
