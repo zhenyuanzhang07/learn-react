@@ -7,9 +7,14 @@ let initialArtists = [
 ];
 
 export default function List() {
-  const [artists, setArtists] = useState(
-    initialArtists
-  );
+  const [artists, setArtists] = useState(initialArtists);
+
+  const deleteArtist = (artistId) => {
+    // Create a new array without the artist to delete
+    const updatedArtists = artists.filter(artist => artist.id !== artistId);
+    // Update the state with the new array
+    setArtists(updatedArtists);
+  };
 
   return (
     <>
@@ -18,9 +23,7 @@ export default function List() {
         {artists.map(artist => (
           <li key={artist.id}>
             {artist.name}{' '}
-            <button onClick={() => {
-              artists.splice(artist.id, 1)
-            }}>
+            <button onClick={() => deleteArtist(artist.id)}>
               Delete
             </button>
           </li>
